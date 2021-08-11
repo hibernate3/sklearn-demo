@@ -103,6 +103,7 @@ def func8():
     '''
     tips = pd.read_csv('tips.csv')
     sns.violinplot(x="day", y="total_bill", data=tips)
+
     plt.show()
 
 
@@ -127,6 +128,6 @@ def func10():
 
 
 if __name__ == '__main__':
-    func10()
+    func7()
     pass
 
