@@ -3,14 +3,29 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import GridSearchCV
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+
+def plot_iris():
+    # 把数据转换成dataframe的格式
+    iris_d = pd.DataFrame(iris['data'], columns=['Sepal_Length', 'Sepal_Width', 'Petal_Length', 'Petal_Width'])
+    iris_d['Species'] = iris.target
+
+    sns.lmplot(x='Petal_Width', y='Sepal_Length', data=iris_d, hue="Species", fit_reg=False)
+    plt.xlabel('Petal_Width')
+    plt.ylabel('Sepal_Length')
+    plt.title('鸢尾花种类分布图')
+    plt.show()
+    pass
+
 
 def knn_iris():
     '''
     使用KNN算法对鸢尾花进行分类
     :return:
     '''
-    # 获取数据
-    iris = load_iris()
 
     # 划分数据集
     x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=22)
@@ -42,9 +57,6 @@ def knn_iris_gscv():
     使用KNN算法对鸢尾花进行分类，添加网格搜索和交叉验证
     :return:
     '''
-    # 获取数据
-    iris = load_iris()
-
     # 划分数据集
     x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=22)
 
@@ -81,7 +93,11 @@ def knn_iris_gscv():
 
 
 if __name__ == '__main__':
+    # 获取数据
+    iris = load_iris()
+
     # knn_iris()
-    knn_iris_gscv()
+    # knn_iris_gscv()
+    plot_iris()
     pass
 
